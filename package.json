@@ -1,0 +1,31 @@
+{
+  "name": "hong-blog",
+  "version": "1.0.0",
+  "description": "博 客  站坑 请期待",
+  "main": "index.js",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "express": "^4.15.2",
+    "immutable": "^3.8.1",
+    "mongoose": "^4.9.5",
+    "react": "^15.5.4",
+    "react-redux": "^5.0.4",
+    "react-router": "^4.1.1",
+    "redux": "^3.6.0",
+    "webpack": "^2.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/only7SAN/hong-blog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/only7SAN/hong-blog/issues"
+  },
+  "homepage": "https://github.com/only7SAN/hong-blog#readme"
+}
