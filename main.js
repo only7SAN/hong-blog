@@ -1,4 +1,13 @@
 var express=require('express');
+var mongoose = require('mongoose');
+
+//使用mongoose实现mongodb数据库连接
+mongoose.connect('mongodb://localhost/hong-blog');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, '连接mongodb数据库出错'));
+db.once('open', function() {
+  console.log('已成功连接mongodb数据库');
+});
 
 var routes=require('./routes/index');
 var app=express();
