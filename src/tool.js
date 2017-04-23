@@ -27,7 +27,7 @@ Tool.ajax = function(mysettings){
 	sData = aData.join('&');
 	settings.type = settings.type.toUpperCase();
 
-	var promise = new promise(resolve,reject){
+	var promise = new Promise(function(resolve,reject){
 		var xhr = new XMLHttpRequest();
 		try{
 			if(settings.type == 'GET'){
@@ -66,7 +66,7 @@ Tool.ajax = function(mysettings){
 		xhr.end = function(){
 			xhr.removeEventListener('readystatechange',httpEnd,false);
 		}
-	}
+	})
 
 
 	function filter(str){

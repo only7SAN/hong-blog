@@ -2,6 +2,7 @@ var express=require('express');
 var mongoose = require('mongoose');
 
 //使用mongoose实现mongodb数据库连接
+mongoose.set('debug', true);
 mongoose.connect('mongodb://localhost/hong-blog');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, '连接mongodb数据库出错'));

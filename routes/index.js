@@ -12,8 +12,7 @@ router.get('/',function(req,res,next){
 router.get('/user',function(req,res){
 	User.find(function(err,users){
 		if(err){return console.error(err);}
-		console.log(users);
-		res.send(users);
+		res.json(users);
 	})
 })
 
