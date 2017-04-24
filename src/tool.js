@@ -22,7 +22,7 @@ Tool.ajax = function(mysettings){
 		settings[attr] = mysettings[attr];
 	}
 	for(var attr in settings.data){
-		aData.push(attr + '=' + filter(settings.data[attr]));
+		aData.push(encodeURIComponent(attr) + '=' + encodeURIComponent(settings.data[attr]));
 	}
 	sData = aData.join('&');
 	settings.type = settings.type.toUpperCase();
@@ -67,20 +67,6 @@ Tool.ajax = function(mysettings){
 			xhr.removeEventListener('readystatechange',httpEnd,false);
 		}
 	})
-
-
-	function filter(str){
-		str += ''; //隐式转换
-        str = str.replace(/%/g, '%25');
-        str = str.replace(/\+/g, '%2B');
-        str = str.replace(/ /g, '%20');
-        str = str.replace(/\//g, '%2F');
-        str = str.replace(/\?/g, '%3F');
-        str = str.replace(/&/g, '%26');
-        str = str.replace(/\=/g, '%3D');
-        str = str.replace(/#/g, '%23');
-        return str;
-	}
 
 	return promise;
 }

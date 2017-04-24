@@ -1,0 +1,56 @@
+.home{
+  	position: relative;
+}
+
+.home-middle{
+    position: relative;
+}
+
+.user-view{
+	position: fixed;
+	width:350px;
+	margin:60px 0 0px 0;
+	top: 0px;
+	bottom: 0px;
+	background-color: #3976a0;
+	color:#fff;
+	box-shadow: 2px 0px 5px #20354e;
+}
+
+.user-view-head{
+	position: relative;
+	width:200px;
+	height: 200px;
+	margin:100px auto 0px auto;
+	border-radius: 50%;
+	border:5px solid #fff;
+	background-color: orange;
+}
+
+.user-view-username{
+	font-size: 28px;
+	text-align: center;
+	margin:50px;
+}
+
+.art-list{
+	margin:60px 0 0 350px;
+	padding-bottom: 50px;
+	background-color: #43d84f;
+}
+
+.art-items{
+	width:700px;
+	margin:0 auto;
+	overflow: hidden;
+}
+
+.art-item{
+	width:660px;
+	height: 200px;
+	margin:30px;
+	background-color: #06c338;
+	border-radius: 5px;
+	color: #fff;
+	box-shadow: 0px 1px 3px #20354e;
+}

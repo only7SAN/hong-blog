@@ -11,8 +11,14 @@ import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-ro
 
 import Root from './layouts/root';
 
-import ArtList from './views/ArtList';
+import Home from './views/Home/Home';
+import ArtDetail from './views/ArtDetail/ArtDetail';
+import ArtNew from './views/ArtNew/ArtNew';
+import SignIn from './views/SignIn/SignIn';
+import SignOut from './views/SignOut/SignOut';
+import SignUp from './views/SignUp/SignUp';
 
+import './views/common.scss';
 
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory();
@@ -36,7 +42,8 @@ ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <div>
-        <Route exact path="/" component={ArtList}/>
+        <Route exact path="/" component={Home}>
+        </Route>
       </div>
     </ConnectedRouter>
   </Provider>,
