@@ -1,56 +1,150 @@
-.home{
-  	position: relative;
-}
-
-.home-middle{
+.home
+{
     position: relative;
 }
 
-.user-view{
-	position: fixed;
-	width:350px;
-	margin:60px 0 0px 0;
-	top: 0px;
-	bottom: 0px;
-	background-color: #3976a0;
-	color:#fff;
-	box-shadow: 2px 0px 5px #20354e;
+.home-middle
+{
+    position: relative;
 }
 
-.user-view-head{
-	position: relative;
-	width:200px;
-	height: 200px;
-	margin:100px auto 0px auto;
-	border-radius: 50%;
-	border:5px solid #fff;
-	background-color: orange;
+.user-view
+{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+
+    width: 350px;
+    margin: 60px 0 0 0;
+
+    color: #fff;
+    background-color: #3976a0;
+    -webkit-box-shadow: 2px 2px 5px #20354e;
+            box-shadow: 2px 0 5px #20354e;
 }
 
-.user-view-username{
-	font-size: 28px;
-	text-align: center;
-	margin:50px;
+.user-view-head
+{
+    position: relative;
+
+    width: 200px;
+    height: 200px;
+    margin: 80px auto 0 auto;
+
+    border: 5px solid #fff;
+    border-radius: 50%;
+    background-color: orange;
 }
 
-.art-list{
-	margin:60px 0 0 350px;
-	padding-bottom: 50px;
-	background-color: #43d84f;
+.user-view-username
+{
+    font-size: 28px;
+
+    margin: 50px;
+
+    text-align: center;
 }
 
-.art-items{
-	width:700px;
-	margin:0 auto;
-	overflow: hidden;
+.art-list
+{
+    position: relative;
+
+    margin: 60px 0 0 350px;
+    padding-bottom: 50px;
+
+    background-color: #bbecbf;
 }
 
-.art-item{
-	width:660px;
-	height: 200px;
-	margin:30px;
-	background-color: #06c338;
-	border-radius: 5px;
-	color: #fff;
-	box-shadow: 0px 1px 3px #20354e;
+.art-items
+{
+    position: relative;
+
+    overflow: hidden;
+
+    width: 700px;
+    margin: 0 auto;
+}
+
+.art-item
+{
+    position: relative;
+
+    box-sizing: border-box;
+    width: 660px;
+    height: 230px;
+    margin: 30px;
+
+    border: 2px solid #fff;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px #20354e;
+}
+
+.art-item:hover
+{
+    border: 2px solid #3976a0;
+}
+
+.art-item-title
+{
+    font-size: 30px;
+
+    margin: 5px 10px;
+
+    cursor: pointer;
+    text-align: center;
+
+    color: #0366d6;
+}
+
+.art-item-label
+{
+    font-size: 24px;
+
+    display: inline-block;
+
+    margin: 5px 0 10px 20px;
+    padding: 5px;
+
+    color: #34596d;
+    background-color: #dce9f7;
+}
+
+.art-item-label:hover
+{
+    background-color: #91c6ff;
+}
+
+.art-item-content
+{
+    font-size: 16px;
+
+    display: block;
+    overflow: hidden;
+
+    box-sizing: border-box;
+    height: 80px;
+    padding: 10px 20px;
+
+    text-overflow: ellipsis;
+
+    color: #34596d;
+    border-top: 2px solid #91c6ff;
+}
+
+.art-item-more
+{
+    font-size: 20px;
+
+    position: absolute;
+    right: 20px;
+    bottom: 5px;
+
+    display: inline-block;
+
+    padding: 5px;
+
+    cursor: pointer;
+
+    color: #029aaf;
 }

@@ -1,0 +1,118 @@
+.art-new
+{
+    position: relative;
+
+    background-color: #3976a0;
+}
+
+.art-new-msg
+{
+    position: fixed;
+    z-index: 1;
+    top: 60px;
+    bottom: 0;
+    left: 0;
+
+    width: 350px;
+
+    background-color: #3976a0;
+    box-shadow: 2px 0 5px #20354e;
+}
+
+.art-new-tip
+{
+    font-size: 28px;
+
+    display: block;
+
+    margin-top: 20px;
+    margin-left: 40px;
+
+    color: #fff;
+}
+
+
+
+.art-new-input
+{
+    font-size: 22px;
+
+    display: block;
+
+    width: 280px;
+    height: 40px;
+    margin: 0 auto;
+    margin-top: 20px;
+
+    border: 0;
+    border-radius: 3px;
+}
+
+
+
+.art-new-content
+{
+    position: relative;
+
+    overflow: hidden;
+
+    height: 100%;
+    margin-top: 60px;
+    margin-left: 350px;
+    padding-bottom: 50px;
+
+    background-color: #3976a0;
+}
+
+.art-new-inner
+{
+    position: absolute;
+    top: 20px;
+    left: 0;
+}
+
+.art-new-simplemde
+{
+    font-size: 20px;
+
+    position: relative;
+
+    display: block;
+
+    width: 700px;
+    margin: 40px auto;
+
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.art-new-btn
+{
+    font-size: 20px;
+    line-height: 40px;
+
+    position: relative;
+
+    display: block;
+
+    width: 180px;
+    height: 40px;
+    margin: 5px auto;
+
+    cursor: pointer;
+
+    color: #fff;
+    border: 0;
+    border-radius: 5px;
+    background-color: #13b2e2;
+}
+
+.art-new-btn:hover
+{
+    background-color: #3693af;
+}
+
+.footer
+{
+    position: fixed;
+}

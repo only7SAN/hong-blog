@@ -7,8 +7,11 @@ class Header extends Component {
         return (
             <div className="header container">
             	<div className="logo">Hong-Blog</div>
-                <input className="header-search" type="text" placeholder="search articles" />
-                <button>Search</button>
+            	<div className="header-search">
+	            	<span className="header-search-title">Article</span>
+	                <input className="header-search-input" type="text" placeholder="search articles" />
+	                <button className="header-search-btn">Search</button>
+                </div>
         	</div>
                         );
     }

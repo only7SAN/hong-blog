@@ -4,12 +4,14 @@
     padding: 0;
 }
 
-li{
-	list-style: none;
+li
+{
+    list-style: none;
 }
 
-a{
-	text-decoration: none;
+a
+{
+    text-decoration: none;
 }
 
 .container
@@ -20,51 +22,115 @@ a{
 }
 
 .header
-{	
-	position: fixed;
-	top: 0px;
-	left: 0px;
+{
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+
     height: 60px;
 
     color: white;
     background-color: #21586d;
-    z-index: 1;
 }
 
 .logo
 {
     font-size: 24px;
-    line-height: 60px;
+    line-height: 50px;
 
-    display: inline;
+    display: inline-block;
 
     width: 200px;
-    height: 60px;
+    height: 50px;
 
     text-align: center;
 
     color: white;
 }
 
+
+
 .header-search
+{
+    position: absolute;
+    top: 15px;
+    left: 30%;
+
+    display: table;
+
+    height: 30px;
+    margin-left: 60px;
+
+    vertical-align: middle;
+
+    border: 0;
+}
+
+.header-search-title
+{
+    display: table-cell;
+
+    padding: 0;
+    padding: 0 10px;
+
+    color: #fff;
+    border: 0;
+    border-right: 2px solid #21586d;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    background-color: #0f3e50;
+}
+
+.header-search-input
 {
     line-height: 30px;
 
-    display: inline;
+    display: table-cell;
 
-    width: 300px;
-    margin-left: 60px;
+    width: 200px;
+    height: 30px;
+
+    color: #fff;
+    border: 0;
+    border-right: 2px solid #21586d;
+    background-color: #0f3e50;
 }
 
-.footer{
-	position: absolute;
-	bottom: 0px;
-	height: 50px;
-	background-color: #21586d;
-	color: white;
-	font-size: 14px;
-	line-height: 50px;
-	z-index: 1;
+.header-search-btn
+{
+    display: table-cell;
+
+    width: 50px;
+    height: 30px;
+
+    color: #fff;
+    border: 0;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    background-color: #0f3e50;
 }
+
+.header-search-title:hover,
+.header-search-btn:hover
+{
+    background-color: #4086a0;
+}
+
+.footer
+{
+    font-size: 14px;
+    line-height: 50px;
+
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+
+    height: 50px;
+
+    color: white;
+    background-color: #21586d;
+}
+
 
 
