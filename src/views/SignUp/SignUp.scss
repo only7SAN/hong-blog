@@ -1,0 +1,55 @@
+.sign-up{
+	position: absolute;
+	top:60px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+	overflow: hidden;
+	background-color: #3976a0;
+}
+
+.sign-up-table{
+	position: relative;
+	width: 1000px;
+	height: 450px;
+	margin: 40px auto;
+	border:2px solid #fff;
+	border-radius: 10px;
+}
+
+.sign-up-row{
+	padding: 40px 0px 0px 20px;
+	margin-bottom: 40px;
+}
+
+.sign-up-tip{
+	font-size: 30px;
+	color: #fff;
+}
+
+.sign-up-input{
+	margin-left: 30px;
+	width: 250px;
+	height: 40px;
+	border-radius: 5px;
+}
+
+.sign-up-head{
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+	width: 550px;
+	font-size: 30px;
+	color: #fff;
+}
+
+
+.sign-up-preview{
+	position: absolute;
+	bottom: 100px;
+}
+
+.sign-up-preview-text{
+	vertical-align: top;
+}

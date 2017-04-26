@@ -2,12 +2,21 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 
-//页面首页主题展示
+import { SignUpTable } from '../../components/SignUp';
+import { Header, Footer } from '../../components/common';
+
+import './SignUp.scss';
+
+//注册页面展示
 class SignUp extends Component {
 
     render(){
         return (
-            <div className="sign-up">首页</div>
+            <div className="sign-up">
+            	<Header />
+            	<SignUpTable />
+            	<Footer />
+            </div>
                         );
     }
 }
