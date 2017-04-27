@@ -42,8 +42,11 @@ ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <div>
-        <Route exact path="/" component={SignUp}>
-        </Route>
+        <Route exact path="/" component={Home} />
+        <Route path="/signup" component={SignUp} />
+        <Route path="/signin" component={SignIn} />
+        <Route path="/art/new" component={ArtNew} />
+        <Route path="/art/detail/:id" component={ArtDetail} />
       </div>
     </ConnectedRouter>
   </Provider>,

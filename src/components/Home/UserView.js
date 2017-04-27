@@ -4,10 +4,12 @@ import React, { Component, PropTypes } from 'react';
 class UserView extends Component {
 
     render(){
+    	let { username ,avatar_url } = this.props.User;
+
         return (
             <div className="user-view">
-            	<div className="user-view-head"></div>
-            	<div className="user-view-username">Only7SAN</div>
+            	<div className="user-view-head">{avatar_url}</div>
+            	<div className="user-view-username">{username}</div>
             </div>
                         );
     }
