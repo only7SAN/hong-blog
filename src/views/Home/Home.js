@@ -11,20 +11,16 @@ import './Home.scss'
 class Home extends Component {
 
     componentWillMount() {
-        let User = {username:"only7SAN",passwrd:"hello",avatar_url:""};
+        let User;
         User ?  null : this.props.history.push('/signin');
     }
 
     render(){
-
-        let User = {username:"only7SAN",passwrd:"hello",avatar_url:""};
-        let mainLeft = User ? <UserView User={User} /> : <UserNull />;
-
         return (
             <div className="home">
             	<Header />
                 <div className="home-middle">
-                	{ mainLeft }
+                	<UserView User={User} />
                 	<ArtList User={User} />
                 </div>
             	<Footer />

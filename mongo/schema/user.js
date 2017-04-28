@@ -1,13 +1,15 @@
 var mongoose = require('mongoose');
 
 var userSchema = mongoose.Schema({
-	userName : { type:String , require },
-	password : { type:String , require }
+	username : { type:String , require },
+	password : { type:String , require },
+	avatar_url: { type:String , require },
+	articles : [{type: mongoose.Schema.Types.ObjectId, ref: 'Article'}]
 })
 
 userSchema.statics.signUp = function(obj){
 
-	return this.find({userName:obj.userName},function(err,user){
+	return this.find({username:obj.username},function(err,user){
 		if(err){console.log("查找出错")};
 		if(user.length !== 0){
 			console.log("用户已存在");
@@ -38,9 +40,9 @@ userSchema.statics.findByUserId = function(id){
 	})
 }
 
-userSchema.statics.findByUserName = function(name){
+userSchema.statics.findByusername = function(name){
 	var json = JSON.stringify(name);
-	return this.find({userName:name},function(err,users){
+	return this.find({username:name},function(err,users){
 		if(err){console.log("失败，没有找到该用户名用户")}
 			console.log("成功找到该用户：" + users)
 	})

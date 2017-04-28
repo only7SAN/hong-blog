@@ -8,34 +8,52 @@ router.get('/',function(req,res,next){
     res.render('./index');
 });
 
-//获取用户列表api，这应该是在后端
-router.get('/user',function(req,res){
-	User.find(function(err,users){
+//获取用户信息
+router.get('/user/:user_id',function(req,res){
+	User.findOne({_id:req.params.user_id},function(err,user){
 		if(err){return console.error(err);}
-		res.json(users);
+		res.json(user);
 	})
 })
 
-//获取文章
+//登录获取用户信息
+router.post('/user',function(req,res){
+
+	var data = req.body;
+
+	User.findOne({
+			username:data.username,
+			password:data.password
+		},function(err,user){
+			if(err){return console.error(err);}
+			res.json(Object.assign({success:true},user));
+	})
+})
+
+//获取某人所有文章
 router.get('/articles',function(req,res){
-	Article.find(function(err,articles){
+
+	var user_id = req.query.user_id;
+
+	User.findOne({_id:user_id }).populate('Article').exec(function(err,articles){
 		if(err){return console.error(err);}
 		console.log(articles);
-		res.send(articles);
+		res.json(articles);
 	})
 })
 
-//post请求新建文章
+//post请求新建用户
 router.post('/user/new',function(req,res){
 
 	var data = req.body;
 
 	User.create({
-		userName:data.userName,
-		password:data.password
-	},function(err,article){
+		username:data.username,
+		password:data.password,
+		avatar_url:data.avatar_url
+	},function(err,user){
 			if(err){return console.error(err)};
-			console.log('创建用户成功')
+			res.json(Object.assign({success:true},user));
 		})
 })
 
@@ -45,15 +63,16 @@ router.post('/article/new',function(req,res){
 
 	var data = req.body;
 
-	User.findOne({_id:data._id},function(err,articles){
+	User.findOne({_id:data.user_id},function(err,user){
 		if(err){return console.error(err);}
 		Article.create({
-			_creator:data._id,
 			title:data.title,
 			label:data.babel,
-			content:data.content
+			content:data.content,
+			_creator:user._id,
 		},function(err,article){
 			if(err){return console.error(err);}
+			user.articles.push(article);
 			console.log('创建文章成功')
 		})
 	})

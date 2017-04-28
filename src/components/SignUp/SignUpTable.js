@@ -1,19 +1,21 @@
 import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 import AvatarEditor from 'react-avatar-editor';
+import {Tool} from '../../tool'
 
 class SignUpTable extends Component {
     constructor(props) {
         super(props);
         this.fileChange = this.fileChange.bind(this);
-        this.state = {image:'',imageSave:null}
+        this.submit = this.submit.bind(this);
+        this.state = {image:'',imageURL:""};
 
         this.saveEditor =() =>{
             if(this.preview.props.image === ""){
-                alert("请上传图片")
+                alert("请上传图片");
+                return ;
             }
-            console.log(this.state)
-            this.setState(Object.assign(this.state,{imageSave:this.preview.getImage()}))
+            this.setState(Object.assign(this.state,{imageURL:this.preview.getImage().toDataURL()}))
         }
     }
 
@@ -42,16 +44,48 @@ class SignUpTable extends Component {
 
     }
 
+    submit(){
+        let userData = {};
+        if(this.username.value !== ""){
+            userData.username = this.username.value;
+        }else{
+            return this.username.focus();
+        }
+        if(this.password.value !== ""){
+            userData.password = this.password.value;
+        }else{
+            return this.password.focus();
+        }
+        if(this.state.imageURL !== ""){
+            userData.avatar_url = "1";
+        }else{
+            return ;
+        }
+
+        console.log(userData);
+        Tool.post('/user/new',userData).then((res) => {
+            if(res.success){
+                this.props.history.push('/signin');
+            }
+        }).catch(function(err){
+            console.log(err)
+        })
+    }
+
     render(){
         return (
             <div className="sign-up-table">
             	<div className="sign-up-row">
                     <label className="sign-up-tip" htmlFor="sign-up-username">username:</label>
-                    <input className="sign-up-input" name="sign-up-username" type="text" />
+                    <input ref={
+                        (username) => { this.username = username}
+                    } className="sign-up-input" name="sign-up-username" type="text" />
                 </div>
                 <div className="sign-up-row">
                     <label className="sign-up-tip" htmlFor="sign-up-password">password:</label>
-                    <input className="sign-up-input" name="sign-up-password" type="password" />
+                    <input ref={
+                        (password) => { this.password = password}
+                    } className="sign-up-input" name="sign-up-password" type="password" />
                 </div>
                 <div className="sign-up-head">
                     <span className="sign-up-img-text">上传图片:</span>
@@ -72,9 +106,10 @@ class SignUpTable extends Component {
                                     rotate={0}
                              />
                         <button className="sign-up-img-result" onClick={this.saveEditor}>保存</button>
-                        <div className="sign-up-save" ref={(imageSave) => { this.imageSave = imageSave }} >{this.state.imageSave}</div>
+                        <div className="sign-up-save" ref={(imageSave) => { this.imageSave = imageSave }} ></div>
                     </div>
                 </div>
+                <button className="sign-up-submit" onClick={this.submit} >提交</button>
             </div>
                         );
     }
