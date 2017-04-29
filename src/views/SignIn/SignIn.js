@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 
+import actions from '../actions';
+
 import { SignInTable, SignInBan } from '../../components/SignIn';
 import { Header, Footer } from '../../components/common';
 
@@ -11,12 +13,13 @@ import './SignIn.scss'
 class SignIn extends Component {
 
     render(){
+        let { actions } = this.props;
         return (
             <div className="sign-in">
             	<Header />
                 <div className="sign-in-middle container">
-                	<SignInBan />
-                	<SignInTable />
+                	<SignInBan  />
+                	<SignInTable history={this.props.history} actions={actions} />
                 </div>
             	<Footer />
             </div>
@@ -24,5 +27,16 @@ class SignIn extends Component {
     }
 }
 
+const mapStateToProps = (state) =>{
+    return {
+        state:state.SignIn
+    }
+}
 
-export default SignIn;
+const mapDispatchToProps = (dispatch) =>{
+    return {
+        actions: bindActionCreators(actions,dispatch)
+    }
+}
+
+export default connect(mapStateToProps , mapDispatchToProps )(SignIn);

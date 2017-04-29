@@ -37,7 +37,7 @@ class ArtNewContent extends Component {
 	             		this.simplemde = simplemde;
 	             	}} className="art-new-textarea"></textarea>
              	</div>
-             	<button className="art-new-btn">发表</button>
+             	<button className="art-new-btn" onClick={this.props.submit}>发表</button>
             </div>
                         );
     }

@@ -1,6 +1,7 @@
 import React,{ Component }from 'react';
 import ReactDOM,{ render }from 'react-dom';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 
@@ -20,19 +21,23 @@ import SignIn from './views/SignIn/SignIn';
 import SignOut from './views/SignOut/SignOut';
 import SignUp from './views/SignUp/SignUp';
 
+import reducers from './store/reducer';
+
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory();
 
 // Build the middleware for intercepting and dispatching navigation actions
-const middleware = routerMiddleware(history)
+const middleware = routerMiddleware(history);
 
 // Add the reducer to your store on the `router` key
 // Also apply our middleware for navigating
 const store = createStore(
   combineReducers({
+    ...reducers,
     router: routerReducer
   }),
-  applyMiddleware(middleware)
+  applyMiddleware(middleware),
+  applyMiddleware(thunk)
 )
 
 // Now you can dispatch navigation actions from anywhere!
@@ -46,7 +51,7 @@ ReactDOM.render(
         <Route path="/signup" component={SignUp} />
         <Route path="/signin" component={SignIn} />
         <Route path="/art/new" component={ArtNew} />
-        <Route path="/art/detail/:id" component={ArtDetail} />
+        <Route path="/article/:id" component={ArtDetail} />
       </div>
     </ConnectedRouter>
   </Provider>,

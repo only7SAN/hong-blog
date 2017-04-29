@@ -7,6 +7,7 @@ class SignInTable extends Component {
     constructor(props) {
         super(props);
         this.signIn = () =>{
+            let actions = this.props.actions;
             let signInData = {};
             if(this.username.value !== ''){
                 signInData.username = this.username.value;
@@ -19,10 +20,16 @@ class SignInTable extends Component {
                 this.password.focus();
             }
 
-            Tool.post('/user',signInData).then((res) => {
-                if(res.success){
-                    console.log(res);
+            actions.postData({
+                prefix:"SIGNIN/",
+                url:'/user',
+                data:signInData,
+                success:(res) => {
+                    actions.userSignIn(res);
                     this.props.history.push('/');
+                },
+                fail:(err) => {
+                    console.log(err)
                 }
             })
         }

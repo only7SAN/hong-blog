@@ -1,8 +1,8 @@
-import ArtDetailRedux from '../views/ArtDetailRedux';
-import ArtListRedux from '../views/ArtListRedux';
-import ArtNewRedux from '../views/ArtNewRedux';
-import SignInRedux from '../views/SignInRedux';
-import SignOutRedux from '../views/SignOutRedux';
-import SignUpRedux from '../views/SignUpRedux';
+import ArtDetail from '../views/ArtDetail/ArtDetailRedux';
+import Home from '../views/Home/HomeRedux';
+import ArtNew from '../views/ArtNew/ArtNewRedux';
+import SignIn from '../views/SignIn/SignInRedux';
+import SignUp from '../views/SignUp/SignUpRedux';
+import User from './UserRedux';
 
-export { ArtDetailRedux, ArtListRedux, ArtNewRedux, SignInRedux, SignOutRedux, SignUpRedux }
+export default { ArtDetail, Home, ArtNew, SignIn, SignUp ,User }

@@ -57,7 +57,7 @@ class SignUpTable extends Component {
             return this.password.focus();
         }
         if(this.state.imageURL !== ""){
-            userData.avatar_url = "1";
+            userData.avatar_url = this.state.imageURL;
         }else{
             return ;
         }

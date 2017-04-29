@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 
+import actions from '../actions';
+
 import { SignUpTable } from '../../components/SignUp';
 import { Header, Footer } from '../../components/common';
 
@@ -21,5 +23,16 @@ class SignUp extends Component {
     }
 }
 
+const mapStateToProps = (state) =>{
+    return {
+        state:state.SignUp
+    }
+}
 
-export default SignUp;
+const mapDispatchToProps = (dispatch) =>{
+    return {
+        actions: bindActionCreators(actions,dispatch)
+    }
+}
+
+export default connect(mapStateToProps , mapDispatchToProps )(SignUp);

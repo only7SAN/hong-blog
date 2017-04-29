@@ -26,7 +26,7 @@ router.post('/user',function(req,res){
 			password:data.password
 		},function(err,user){
 			if(err){return console.error(err);}
-			res.json(Object.assign({success:true},user));
+			res.json(user);
 	})
 })
 
@@ -35,10 +35,21 @@ router.get('/articles',function(req,res){
 
 	var user_id = req.query.user_id;
 
-	User.findOne({_id:user_id }).populate('Article').exec(function(err,articles){
+	Article.find({_creator:user_id },function(err,articles){
 		if(err){return console.error(err);}
 		console.log(articles);
 		res.json(articles);
+	})
+})
+
+//获取文章详细信息
+router.get('/article/:article_id',function(req,res){
+
+	var article_id = req.params.article_id;
+
+	Article.find({_id:article_id },function(err,article){
+		if(err){return console.error(err);}
+		res.json(article);
 	})
 })
 
@@ -72,8 +83,15 @@ router.post('/article/new',function(req,res){
 			_creator:user._id,
 		},function(err,article){
 			if(err){return console.error(err);}
-			user.articles.push(article);
+			user.articles.push(article._id);
+			var user_id = user._id; //需要取出主键_id
+      		delete user._id;
+			User.update({_id:user_id},user,function(err){
+				if(err){console.log(err)}
+					console.log("更新成功")
+			});
 			console.log('创建文章成功')
+			res.json(article)
 		})
 	})
 })
