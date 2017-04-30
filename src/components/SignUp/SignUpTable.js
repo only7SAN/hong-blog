@@ -63,7 +63,7 @@ class SignUpTable extends Component {
         }
 
         console.log(userData);
-        Tool.post('/user/new',userData).then((res) => {
+        Tool.post('/api/user/new',userData).then((res) => {
             if(res.success){
                 this.props.history.push('/signin');
             }

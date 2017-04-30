@@ -1,50 +1,60 @@
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
 
 var userSchema = mongoose.Schema({
 	username : { type:String , require },
 	password : { type:String , require },
 	avatar_url: { type:String , require },
+	create_date: { type: Date, default: Date.now },
 	articles : [{type: mongoose.Schema.Types.ObjectId, ref: 'Article'}]
 })
 
-userSchema.statics.signUp = function(obj){
+userSchema.statics.signUp = function(obj,cb){
+	var that = this;
 
 	return this.find({username:obj.username},function(err,user){
-		if(err){console.log("查找出错")};
-		if(user.length !== 0){
+		if(err){
+			console.log("查找出错")
+		}else if(user.length !== 0){
 			console.log("用户已存在");
 		}else{
-			that.create(obj,function(err,user){
-			if(err){console.log("录入用户失败")}
-				console.log("录入用户成功：" + user)
+			bcrypt.genSalt(10, function(err, salt) {
+			    bcrypt.hash(obj.password, salt, function(err, hash) {
+			        // Store hash in your password DB.
+			        if(err){
+			        	console.log("生成hash失败")
+			        }else{
+				        obj.password = hash;
+				        console.log(obj)
+					    that.create(obj,function(err,user){
+							if(err){
+								console.log("录入用户失败")
+							}else{
+								console.log("录入用户成功");
+								cb();
+							}
+						});
+					}
+			    });
 			});
 		}
 	})
 }
 
-userSchema.statics.del = function(id){
-	//转换为json
-	var json = JSON.stringify(id);
+userSchema.statics.signIn = function(obj,cb){
 
-	return this.remove({_id:id},function(err,user){
-		if(err){console.log("删除失败")};
-		console.log("成功删除用户: " + user);
-	})
-}
-
-userSchema.statics.findByUserId = function(id){
-	var json = JSON.stringify(id);
-	return this.findOne({_id:id},function(err,user){
-		if(err){console.log("失败，没有找到该id用户")}
-			console.log("成功找到该用户：" + user)
-	})
-}
-
-userSchema.statics.findByusername = function(name){
-	var json = JSON.stringify(name);
-	return this.find({username:name},function(err,users){
-		if(err){console.log("失败，没有找到该用户名用户")}
-			console.log("成功找到该用户：" + users)
+	return this.findOne({username:obj.username},function(err,user){
+		if(err){console.log("用户查找出错")};
+		let hash = user.password;
+		console.log(obj)
+		console.log(user.password)
+		bcrypt.compare(obj.password, hash, function(err, result) {
+		    // res == true
+		    if(err){console.log("比较密码出错")};
+		    if(result == true){
+		    	cb(user);
+		    }
+		});
 	})
 }
 

@@ -25,7 +25,8 @@ class SignUp extends Component {
 
 const mapStateToProps = (state) =>{
     return {
-        state:state.SignUp
+        state:state.SignUp,
+        User:state.User
     }
 }
 

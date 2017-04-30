@@ -4,6 +4,7 @@
   "description": "博 客  站坑 请期待",
   "main": "index.js",
   "dependencies": {
+    "bcrypt": "^1.0.2",
     "bootstrap": "^3.3.7",
     "express": "^4.15.2",
     "history": "^4.6.1",
@@ -44,7 +45,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node main.js  --watch --colors"
+    "dev": "node main.js --colors"
   },
   "repository": {
     "type": "git",

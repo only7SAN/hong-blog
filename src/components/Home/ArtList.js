@@ -7,11 +7,6 @@ import ArtNewIcon from './ArtNewIcon';
 import ArtNull from './ArtNull';
 
 class ArtList extends Component {
-    componentDidMount() {
-        let { User,actions }=this.props;
-
-
-    }
 
     render(){
         let articles = this.props.articles;
@@ -22,7 +17,7 @@ class ArtList extends Component {
 	            <ul className="art-items">
 	            	{
                         (articles&&articles.length !== 0) ? articles.map((item,index) => {
-                            return <ArtItem key={index} {...item} /> 
+                            return <ArtItem key={index} {...item} />
                         }) : <ArtNull />
                     }
             	</ul>

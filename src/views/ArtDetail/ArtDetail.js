@@ -12,8 +12,8 @@ class ArtDetail extends Component {
         let { User, actions } = this.props;
         actions.fetchData({
             component:"ArtDetail",
-            prefix:"ARTDEATIL/",
-            url:this.props.location.pathname,
+            prefix:"ARTDETAIL/",
+            url:`/api${this.props.location.pathname}`,
             success:(res) => {
                 console.log(res)
             }
@@ -21,9 +21,16 @@ class ArtDetail extends Component {
     }
 
     render(){
-        console.log(this.props)
+        console.log(this.props);
+        if(this.props.state.data){
+            var { title, label, content } = this.props.state.data;
+        }
         return (
-            <div className="article-detail">首页</div>
+            <div className="art-detail">
+                <h3 className="art-detail-title">{ title }</h3>
+                <span className="art-detail-label">{ label }</span>
+                <div className="art-detail-markdown">{ content }</div>
+            </div>
                         );
     }
 }

@@ -22,7 +22,7 @@ class SignInTable extends Component {
 
             actions.postData({
                 prefix:"SIGNIN/",
-                url:'/user',
+                url:'/api/user',
                 data:signInData,
                 success:(res) => {
                     actions.userSignIn(res);

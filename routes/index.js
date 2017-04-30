@@ -9,7 +9,7 @@ router.get('/',function(req,res,next){
 });
 
 //获取用户信息
-router.get('/user/:user_id',function(req,res){
+router.get('/api/user/:user_id',function(req,res){
 	User.findOne({_id:req.params.user_id},function(err,user){
 		if(err){return console.error(err);}
 		res.json(user);
@@ -17,21 +17,17 @@ router.get('/user/:user_id',function(req,res){
 })
 
 //登录获取用户信息
-router.post('/user',function(req,res){
+router.post('/api/user',function(req,res){
 
 	var data = req.body;
 
-	User.findOne({
-			username:data.username,
-			password:data.password
-		},function(err,user){
-			if(err){return console.error(err);}
-			res.json(user);
+	User.signIn(data,function(user){
+		res.json(user);
 	})
 })
 
 //获取某人所有文章
-router.get('/articles',function(req,res){
+router.get('/api/articles',function(req,res){
 
 	var user_id = req.query.user_id;
 
@@ -43,34 +39,29 @@ router.get('/articles',function(req,res){
 })
 
 //获取文章详细信息
-router.get('/article/:article_id',function(req,res){
+router.get('/api/article/:article_id',function(req,res){
 
 	var article_id = req.params.article_id;
 
-	Article.find({_id:article_id },function(err,article){
+	Article.findOne({_id:article_id },function(err,article){
 		if(err){return console.error(err);}
 		res.json(article);
 	})
 })
 
 //post请求新建用户
-router.post('/user/new',function(req,res){
+router.post('/api/user/new',function(req,res){
 
 	var data = req.body;
 
-	User.create({
-		username:data.username,
-		password:data.password,
-		avatar_url:data.avatar_url
-	},function(err,user){
-			if(err){return console.error(err)};
-			res.json(Object.assign({success:true},user));
-		})
+	User.signUp(data,function(){
+		res.json({success:true})
+	});
 })
 
 
 //post请求新建文章
-router.post('/article/new',function(req,res){
+router.post('/api/article/new',function(req,res){
 
 	var data = req.body;
 

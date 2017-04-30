@@ -8,7 +8,9 @@ class UserView extends Component {
 
         return (
             <div className="user-view">
-            	<div className="user-view-head">{avatar_url}</div>
+            	<div className="user-view-head">
+            		<img className="user-view-image" src={avatar_url} />
+            	</div>
             	<div className="user-view-username">{username}</div>
             </div>
                         );

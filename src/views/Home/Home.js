@@ -22,7 +22,7 @@ class Home extends Component {
         actions.fetchData({
             component:"Home",
             prefix:"HOME/",
-            url:'/articles',
+            url:'/api/articles',
             data:{user_id:User._id},
             success:(res) =>{
                 console.log(res)
@@ -39,7 +39,8 @@ class Home extends Component {
             	<Header />
                 <div className="home-middle">
                 	<UserView User={User} />
-                	<ArtList User={User} actions={{fetchData:actions.fetchData}} articles={ articles } />
+                	<ArtList User={User} articles={ articles } />
+                    <div className="back-color" />
                 </div>
             	<Footer />
             </div>

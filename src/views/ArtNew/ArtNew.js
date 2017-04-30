@@ -39,7 +39,7 @@ class ArtNew extends Component {
 
             actions.postData({
                 prefix:"ARTNEW/",
-                url:'/article/new',
+                url:'/api/article/new',
                 data:artNewData,
                 success:(res) => {
                     console.log(res);

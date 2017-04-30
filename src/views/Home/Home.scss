@@ -8,6 +8,16 @@
     position: relative;
 }
 
+.back-color{
+    position: fixed;
+    top: 0px;
+    left:0px;
+    bottom: 0px;
+    right:0px;
+    background-color:#bbecbf;
+    z-index: -1;
+}
+
 .user-view
 {
     position: fixed;
@@ -49,6 +59,12 @@
     border: 5px solid #fff;
     border-radius: 50%;
     background-color: orange;
+    overflow: hidden;
+}
+
+.user-view-image{
+    width: 100%;
+    height: 100%;
 }
 
 .user-view-username
