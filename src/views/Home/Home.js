@@ -11,6 +11,13 @@ import './Home.scss'
 
 //页面首页主题展示
 class Home extends Component {
+    constructor(props) {
+        super(props);
+        this.signOut = () =>{
+            this.props.actions.userSignOut();
+            this.props.history.push('/signin');
+        }
+    }
 
     componentWillMount() {
         let { User }=this.props;
@@ -26,25 +33,30 @@ class Home extends Component {
             data:{user_id:User._id},
             success:(res) =>{
                 console.log(res)
+            },
+            fail:(err) =>{
+                console.log(err)
             }
         })
     }
 
     render(){
-        console.log(this.props)
         let { User, actions ,state} = this.props;
-        let articles = state.articles;
         return (
             <div className="home">
             	<Header />
                 <div className="home-middle">
-                	<UserView User={User} />
-                	<ArtList User={User} articles={ articles } />
+                	<UserView User={User} signOut={this.signOut} />
+                	<ArtList User={User} state={ state } />
                     <div className="back-color" />
                 </div>
             	<Footer />
             </div>
                         );
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps !== this.props;
     }
 }
 

@@ -5,22 +5,33 @@ import { Tool } from '../../tool';
 import ArtItem from './ArtItem';
 import ArtNewIcon from './ArtNewIcon';
 import ArtNull from './ArtNull';
+import ArtLoad from './ArtLoad';
 
 class ArtList extends Component {
 
     render(){
-        let articles = this.props.articles;
-        console.log(articles)
+        let { isFetching, articles } = this.props.state;
+        let newIcon = this.props.User ? <ArtNewIcon /> : null;
+        let main;
+        if(isFetching == true){
+            main = <ArtLoad />;
+        }else{
+            if(articles&&articles.length !== 0){
+                main =  articles.map((item,index) => {
+                            return <ArtItem key={index} {...item} />
+                        })
+            }else if(articles&&articles.length === 0){
+                main = <ArtNull />
+            }else{
+                main = <ArtNull />
+            }
+        }
         return (
             <div className="art-list">
-            	<ArtNewIcon />
-	            <ul className="art-items">
-	            	{
-                        (articles&&articles.length !== 0) ? articles.map((item,index) => {
-                            return <ArtItem key={index} {...item} />
-                        }) : <ArtNull />
-                    }
-            	</ul>
+                <ul className="art-items">
+                	{ newIcon }
+                    { main }
+                </ul>
             </div>
                         );
     }

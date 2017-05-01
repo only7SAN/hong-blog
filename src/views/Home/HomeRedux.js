@@ -11,7 +11,6 @@ const Home = (state = {
 				})
 				return newState;
 			case "HOME/SUCCESS_FETCH_DATA":
-				console.log("121312321")
 				newState = Object.assign({},state,{
 					isFetching:false,
 					articles:action.payload

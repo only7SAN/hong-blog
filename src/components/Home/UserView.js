@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import UserSettings from './UserSettings';
 
 //页面首页主题展示
 class UserView extends Component {
@@ -8,6 +9,7 @@ class UserView extends Component {
 
         return (
             <div className="user-view">
+                <UserSettings signOut={this.props.signOut} />
             	<div className="user-view-head">
             		<img className="user-view-image" src={avatar_url} />
             	</div>

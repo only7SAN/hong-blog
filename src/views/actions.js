@@ -23,11 +23,11 @@ let actions = {
 
 		//发送ajax请求，获取数据
 		Tool.get(_settings.url,_settings.data).then((res) =>{
-			dispatch(actions.successFetchData(_settings.prefix,res));
 			_settings.success(res);
+			dispatch(actions.successFetchData(_settings.prefix,res));
 		}).catch((err) =>{
-			dispatch(actions.failFetchData(_settings.prefix,error));
 			_settings.fail(err);
+			dispatch(actions.failFetchData(_settings.prefix,err));
 		})
 	},
 

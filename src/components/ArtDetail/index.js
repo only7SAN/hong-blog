@@ -1,4 +1,4 @@
-import ArtNewMsg from './ArtNewMsg';
-import ArtNewContent from './ArtNewContent';
+import ArtDetailItem from './ArtDetailItem';
+import ArtDetailLoad from './ArtDetailLoad';
 
-export { ArtNewMsg, ArtNewContent }
+export { ArtDetailItem, ArtDetailLoad }

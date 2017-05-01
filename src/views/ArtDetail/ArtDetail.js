@@ -3,8 +3,12 @@ import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 
 import actions from '../actions';
+import { ArtDetailItem,ArtDetailLoad } from '../../components/ArtDetail'
+import { Header, Footer } from '../../components/common';
 
-//页面首页主题展示
+import './ArtDetail.scss';
+
+//文章详情页面
 class ArtDetail extends Component {
 
     componentDidMount() {
@@ -21,15 +25,22 @@ class ArtDetail extends Component {
     }
 
     render(){
-        console.log(this.props);
-        if(this.props.state.data){
-            var { title, label, content } = this.props.state.data;
+        let { isFetching } = this.props.state;
+        let main;
+        if(isFetching == true){
+            main = <ArtDetailLoad />;
+        }else{
+            if(this.props.state.data){
+                main = <ArtDetailItem data={this.props.state.data} />
+            }else{
+                main = null;
+            }
         }
         return (
-            <div className="art-detail">
-                <h3 className="art-detail-title">{ title }</h3>
-                <span className="art-detail-label">{ label }</span>
-                <div className="art-detail-markdown">{ content }</div>
+            <div className="art-detai-page">
+                <Header />
+                    { main }
+                <Footer />
             </div>
                         );
     }

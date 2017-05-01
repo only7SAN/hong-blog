@@ -69,7 +69,7 @@ router.post('/api/article/new',function(req,res){
 		if(err){return console.error(err);}
 		Article.create({
 			title:data.title,
-			label:data.babel,
+			label:data.label,
 			content:data.content,
 			_creator:user._id,
 		},function(err,article){
