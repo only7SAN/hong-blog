@@ -8,7 +8,7 @@ router.get('/',function(req,res,next){
     res.render('./index');
 });
 
-//获取用户信息
+//获取用户详细信息
 router.get('/api/user/:user_id',function(req,res){
 	User.findOne({_id:req.params.user_id},function(err,user){
 		if(err){return console.error(err);}
@@ -31,7 +31,9 @@ router.get('/api/articles',function(req,res){
 
 	var user_id = req.query.user_id;
 
-	Article.find({_creator:user_id },function(err,articles){
+	Article.find({_creator:user_id })
+	.sort({ create_at: 'asc' })
+	.exec(function(err,articles){
 		if(err){return console.error(err);}
 		console.log(articles);
 		res.json(articles);
@@ -59,6 +61,21 @@ router.post('/api/user/new',function(req,res){
 	});
 })
 
+//删除用户
+router.get('/api/user/del',function(req,res){
+
+	var user_id = req.query.user_id;
+
+	User.remove({_id:user_id},function(err,user){
+		if(err){
+			console.log(err)
+		}else{
+			console.log("删除成功");
+			res.json({success:true});
+		}
+	});
+})
+
 
 //post请求新建文章
 router.post('/api/article/new',function(req,res){
@@ -79,12 +96,46 @@ router.post('/api/article/new',function(req,res){
       		delete user._id;
 			User.update({_id:user_id},user,function(err){
 				if(err){console.log(err)}
-					console.log("更新成功")
+					console.log("user更新成功")
 			});
 			console.log('创建文章成功')
 			res.json(article)
 		})
 	})
+})
+
+//post请求更新用户
+router.post('/api/article/update',function(req,res){
+
+	var data = req.body;
+
+	Article.findOne({_id:data.article_id},function(err,article){
+		if(err){
+			return console.error(err);
+		}else{
+			for(name in data){
+				data[name] = name;
+			}
+			article.update_at = new Date();
+			article.save(function(err){
+				console.log(err);
+			})
+		}
+})
+
+//删除文章
+router.get('/api/article/del',function(req,res){
+
+	var article_id = req.query.article_id;
+
+	Article.remove({_id:article_id},function(err,article){
+		if(err){
+			console.log(err)
+		}else{
+			console.log("删除成功");
+			res.json({success:true});
+		}
+	});
 })
 
 router.get('/*',function(req,res,next){
