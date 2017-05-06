@@ -46,7 +46,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node main.js --colors"
+    "dev": "DEBUG=express:* node main.js --colors"
   },
   "repository": {
     "type": "git",

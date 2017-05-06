@@ -40,7 +40,6 @@ class ArtDetail extends Component {
             <div className="art-detai-page">
                 <Header />
                     { main }
-                <Footer />
             </div>
                         );
     }

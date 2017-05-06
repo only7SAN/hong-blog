@@ -15,27 +15,27 @@ class SignUpTable extends Component {
                 alert("请上传图片");
                 return ;
             }
-            this.setState(Object.assign(this.state,{imageURL:this.preview.getImage().toDataURL()}))
+            this.setState(Object.assign(this.state,{imageURL:this.preview.getImageScaledToCanvas().toDataURL()}))
         }
     }
 
     fileChange(){
         let imageFile = this.imageFile.files[0],
-            imgPreview = this.preview;
-
-        if(typeof FileReader == 'undefined') {
-            result.innerHTML = "抱歉，你的浏览器不支持FileReader";
-        }
-
-        let ext=imageFile.name.substring(imageFile.name.lastIndexOf(".")+1).toLowerCase();
-
-         // gif在IE浏览器暂时无法显示
-         if(ext!='png'&&ext!='jpg'&&ext!='jpeg'){
-             alert("图片的格式必须为png或者jpg或者jpeg格式！");
-             return;
-         }
+            imgPreview = this.preview,
+            ext=imageFile.name.substring(imageFile.name.lastIndexOf(".")+1).toLowerCase();
 
         let reader = new FileReader();
+
+         // gif在IE浏览器暂时无法显示
+        if(typeof FileReader == 'undefined') {
+            result.innerHTML = "抱歉，你的浏览器不支持FileReader";
+         }else if(ext!='png'&&ext!='jpg'&&ext!='jpeg'){
+             alert("图片的格式必须为png或者jpg或者jpeg格式！");
+             return;
+         }else if(imageFile/1024 >= 6000){
+            alert("图片大小不能超过5M")
+            return;
+        }
 
         reader.readAsDataURL(imageFile);
         reader.onload = (e) =>{
@@ -66,6 +66,8 @@ class SignUpTable extends Component {
         Tool.post('/api/user/new',userData).then((res) => {
             if(res.success){
                 this.props.history.push('/signin');
+            }else if(res.exist){
+                alert("用户名已存在");
             }
         }).catch(function(err){
             console.log(err)

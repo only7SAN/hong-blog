@@ -46,15 +46,23 @@
     position: relative;
     width: 40px;
     height: 40px;
+    border-radius: 50%;
     background-color: #fff;
 }
 
 .user-settings-pannel{
     position: absolute;
-    top:40px;
-    left: 0px;
-    border:1px solid #fff;
+    top:0px;
+    left: 40px;
+    border:3px solid #ef68ff;
+    width: 120px;
+    padding: 5px 15px;
+    box-sizing:border-box;
     display: none;
+    background-color: #fff;
+    border-radius: 10px;
+    color: #de5167;
+    font-weight: bold;
 }
 
 .pannel{
@@ -102,6 +110,12 @@
 
     background-color: #bbecbf;
     overflow: hidden;
+}
+
+.art-list-null-title{
+    color:#4b9be2;
+    text-align: center;
+    margin-top: 50px;
 }
 
 .art-load{

@@ -7,7 +7,7 @@
 
 ## 工具
 
->* 前端: webpack, react, redux(状态管理)
+>* 前端: webpack, react, redux(状态管理), react-router(路由)
 >
 >* 服务器: node, express(使用ajax进行前后端通信)
 >

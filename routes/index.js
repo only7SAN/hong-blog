@@ -1,12 +1,13 @@
 var express=require('express');
 var router=express.Router();
+var bcrypt = require('bcrypt');
 var User = require('../mongo/model/user');
 var Article = require('../mongo/model/article');
 
 //get home page,因为使用了react-router来处理处理做单页应用，在express中我们就只用给其一个入口路径
 router.get('/',function(req,res,next){
     res.render('./index');
-});
+})
 
 //获取用户详细信息
 router.get('/api/user/:user_id',function(req,res){
@@ -19,10 +20,22 @@ router.get('/api/user/:user_id',function(req,res){
 //登录获取用户信息
 router.post('/api/user',function(req,res){
 
-	var data = req.body;
+	var obj = req.body;
 
-	User.signIn(data,function(user){
-		res.json(user);
+	User.findOne({username:obj.username},function(err,user){
+		if(err){console.log("用户查找出错")};
+		let hash = user.password;
+		console.log(obj)
+		console.log(user.password)
+		bcrypt.compare(obj.password, hash, function(err, result) {
+		    // res == true
+		    if(err){
+		    	console.log("比较密码出错")
+		    	res.json(err);
+			}else if(result == true){
+		    	res.json(user);
+		    }
+		});
 	})
 })
 
@@ -32,7 +45,7 @@ router.get('/api/articles',function(req,res){
 	var user_id = req.query.user_id;
 
 	Article.find({_creator:user_id })
-	.sort({ create_at: 'asc' })
+	.sort({ create_at: 'desc' })
 	.exec(function(err,articles){
 		if(err){return console.error(err);}
 		console.log(articles);
@@ -54,11 +67,36 @@ router.get('/api/article/:article_id',function(req,res){
 //post请求新建用户
 router.post('/api/user/new',function(req,res){
 
-	var data = req.body;
+	var obj = req.body;
 
-	User.signUp(data,function(){
-		res.json({success:true})
-	});
+	User.find({username:obj.username},function(err,user){
+		if(err){
+			console.log("查找出错")
+		}else if(user.length !== 0){
+			console.log("用户已存在");
+			res.json({exist:true})
+		}else{
+			bcrypt.genSalt(10, function(err, salt) {
+			    bcrypt.hash(obj.password, salt, function(err, hash) {
+			        // Store hash in your password DB.
+			        if(err){
+			        	console.log("生成hash失败")
+			        }else{
+				        obj.password = hash;
+				        console.log(obj)
+					    User.create(obj,function(err,user){
+							if(err){
+								console.log("录入用户失败")
+							}else{
+								console.log("录入用户成功");
+								res.json({success:true})
+							}
+						});
+					}
+			    });
+			})
+		}
+	})
 })
 
 //删除用户
@@ -73,7 +111,7 @@ router.get('/api/user/del',function(req,res){
 			console.log("删除成功");
 			res.json({success:true});
 		}
-	});
+	})
 })
 
 
@@ -121,6 +159,7 @@ router.post('/api/article/update',function(req,res){
 				console.log(err);
 			})
 		}
+	})
 })
 
 //删除文章
@@ -135,12 +174,11 @@ router.get('/api/article/del',function(req,res){
 			console.log("删除成功");
 			res.json({success:true});
 		}
-	});
+	})
 })
 
 router.get('/*',function(req,res,next){
     res.render('./index');
-});
-
+})
 
 module.exports=router;

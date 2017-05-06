@@ -13,7 +13,7 @@ db.once('open', function() {
 
 var app=express();
 
-app.use(bodyParser.json({ limit: '2mb' })); // for parsing application/json
+app.use(bodyParser.json({ limit: '5mb' })); // for parsing application/json
 app.use(bodyParser.urlencoded({ limit: '5mb', extended: true })); // for parsing application/x-www-form-urlencoded
 
 var routes=require('./routes/index');
