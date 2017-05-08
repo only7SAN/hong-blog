@@ -11,8 +11,17 @@ router.get('/',function(req,res,next){
 
 //获取用户详细信息
 router.get('/api/user/:user_id',function(req,res){
+	if(!req.params.user_id){
+		return res.status(400).json({message:"用户id未提供"})
+	}
+
 	User.findOne({_id:req.params.user_id},function(err,user){
-		if(err){return console.error(err);}
+		if(err){
+			console.log(err);
+			return res.status(500).json({error:true,message:"不能提交查找用户请求"})
+		}else if(!user){
+			return res.status(404).json({message:"用户未找到"})
+		}
 		res.json(user);
 	})
 })
@@ -21,17 +30,23 @@ router.get('/api/user/:user_id',function(req,res){
 router.post('/api/user',function(req,res){
 
 	var obj = req.body;
+	if(!obj.username||!obj.password){
+		return res.status(400).json({message:"用户id帐号密码未提供"})
+	}
 
 	User.findOne({username:obj.username},function(err,user){
-		if(err){console.log("用户查找出错")};
+		if(err){
+			console.log("用户查找出错")
+			return res.status(500).json({error:true,message:"不能提交查找用户请求"})
+		}else if(!user){
+			return res.status(404).json({message:"未找到用户"})
+		}
 		let hash = user.password;
-		console.log(obj)
-		console.log(user.password)
 		bcrypt.compare(obj.password, hash, function(err, result) {
 		    // res == true
 		    if(err){
 		    	console.log("比较密码出错")
-		    	res.json(err);
+		    	return res.status(404).json({message:"比较密码出错"});
 			}else if(result == true){
 		    	res.json(user);
 		    }
@@ -43,11 +58,19 @@ router.post('/api/user',function(req,res){
 router.get('/api/articles',function(req,res){
 
 	var user_id = req.query.user_id;
+	if(!req.query.user_id){
+		return res.status(403).json({message:"未提供账户密码"})
+	}
 
 	Article.find({_creator:user_id })
 	.sort({ create_at: 'desc' })
 	.exec(function(err,articles){
-		if(err){return console.error(err);}
+		if(err){
+			console.error(err);
+			return res.status(500).json({error:true,message:"不能提交查找文章请求"})
+		}else if(!articles){
+			return res.status(404).json({message:"找不到该用户的文章"})
+		}
 		console.log(articles);
 		res.json(articles);
 	})
@@ -57,9 +80,17 @@ router.get('/api/articles',function(req,res){
 router.get('/api/article/:article_id',function(req,res){
 
 	var article_id = req.params.article_id;
+	if(!req.params.article_id){
+		return res.status(400).json({message:"未提供文章id"})
+	}
 
 	Article.findOne({_id:article_id },function(err,article){
-		if(err){return console.error(err);}
+		if(err){
+			console.error(err);
+			return res.status(500).json({error:true,message:"不能提交查找文章请求"})
+		}else if(!article){
+			return res.status(404).json({message:"找不到该用户的文章详细内容"})
+		}
 		res.json(article);
 	})
 })
@@ -68,25 +99,31 @@ router.get('/api/article/:article_id',function(req,res){
 router.post('/api/user/new',function(req,res){
 
 	var obj = req.body;
+	if(!obj.username||!obj.password||!obj.avatar_url){
+		return res.status(400).json({message:"请提供 用户名 密码 和 头像"})
+	}
 
 	User.find({username:obj.username},function(err,user){
 		if(err){
-			console.log("查找出错")
+			console.error(err);
+			return res.status(500).json({error:true,message:"不能提交查找用户请求"})
 		}else if(user.length !== 0){
 			console.log("用户已存在");
-			res.json({exist:true})
+			return res.json({exist:true})
 		}else{
 			bcrypt.genSalt(10, function(err, salt) {
 			    bcrypt.hash(obj.password, salt, function(err, hash) {
 			        // Store hash in your password DB.
 			        if(err){
 			        	console.log("生成hash失败")
+			        	return res.status(500).json({error:true,message:"生成hash请求失败"})
 			        }else{
 				        obj.password = hash;
 				        console.log(obj)
 					    User.create(obj,function(err,user){
 							if(err){
-								console.log("录入用户失败")
+								console.log("录入用户失败");
+								return res.status(500).json({error:true,message:"创建用户请求失败"});
 							}else{
 								console.log("录入用户成功");
 								res.json({success:true})
@@ -103,10 +140,16 @@ router.post('/api/user/new',function(req,res){
 router.get('/api/user/del',function(req,res){
 
 	var user_id = req.query.user_id;
+	if(!req.query.user_id){
+		return res.status(403).json({message:"请提供 用户id"})
+	}
 
 	User.remove({_id:user_id},function(err,user){
 		if(err){
-			console.log(err)
+			console.log(err);
+			return res.status(500).json({error:true,message:"删除用户请求失败"})
+		}else if(!user){
+			return res.status(404).json({message:"没有找到要删除的用户"})
 		}else{
 			console.log("删除成功");
 			res.json({success:true});
@@ -119,21 +162,37 @@ router.get('/api/user/del',function(req,res){
 router.post('/api/article/new',function(req,res){
 
 	var data = req.body;
+	if(!data.user_id){
+		return res.status(403).json({message:"请提供用户id"})
+	}else if(!data.title||!data.label||!data.content){
+		return res.status(400).json({message:"请提供 标题 标签 和 内容"})
+	}
 
 	User.findOne({_id:data.user_id},function(err,user){
-		if(err){return console.error(err);}
+		if(err){
+			console.log(err);
+			return res.status(500).json({error:true,message:"新建文章查找用户失败"})
+		}else if(!user){
+			return res.status(404).json({message:"找不到当前用户"})
+		}
 		Article.create({
 			title:data.title,
 			label:data.label,
 			content:data.content,
 			_creator:user._id,
 		},function(err,article){
-			if(err){return console.error(err);}
+			if(err){
+				console.log(err);
+				return res.status(500).json({error:true,message:"创建文章请求失败"})
+			}
 			user.articles.push(article._id);
 			var user_id = user._id; //需要取出主键_id
       		delete user._id;
 			User.update({_id:user_id},user,function(err){
-				if(err){console.log(err)}
+				if(err){
+					console.log(err)
+					return res.status(500).json({error:true,message:"创建文章更新用户请求失败"})
+				}
 					console.log("user更新成功")
 			});
 			console.log('创建文章成功')
@@ -142,23 +201,44 @@ router.post('/api/article/new',function(req,res){
 	})
 })
 
-//post请求更新用户
+//post请求更新文章
 router.post('/api/article/update',function(req,res){
 
 	var data = req.body;
+	if(!data.user_id){
+		return res.status(403).json({message:"请提供用户id"})
+	}else if(!data.title&&!data.label&&!data.content){
+		return res.status(400).json({message:"请提供 标题 标签 和 内容 之一"})
+	}
 
-	Article.findOne({_id:data.article_id},function(err,article){
+	User.findOne({_id:data.user_id},function(err,user){
 		if(err){
-			return console.error(err);
-		}else{
-			for(name in data){
-				data[name] = name;
-			}
-			article.update_at = new Date();
-			article.save(function(err){
-				console.log(err);
-			})
+			console.log(err);
+			return res.status(500).json({error:true,message:"新建文章查找用户失败"})
+		}else if(!user){
+			return res.status(404).json({message:"找不到当前用户"})
 		}
+
+		Article.findOne({_id:data.article_id},function(err,article){
+			if(err){
+				console.log(err);
+				return res.status(500).json({error:true,message:"请求更新用户失败"})
+			}else if(!article){
+				return res.status(404).json({message:"找不到当该文章"})
+			}else{
+				for(name in data){
+					data[name] = name;
+				}
+				article.update_at = new Date();
+				article.save(function(err){
+					if(err){
+						console.log(err);
+						return res.status(500).json({error:true,message:"保存更新用户更新时间失败"})
+					}
+					res.json({success:true})
+				})
+			}
+		})
 	})
 })
 
@@ -166,10 +246,16 @@ router.post('/api/article/update',function(req,res){
 router.get('/api/article/del',function(req,res){
 
 	var article_id = req.query.article_id;
+	if(!req.query.article_id){
+		return res.status(400).json({message:"请提供文章id"})
+	}
 
 	Article.remove({_id:article_id},function(err,article){
 		if(err){
-			console.log(err)
+			console.log(err);
+			return res.status(500).json({error:true,message:"删除用户请求失败"})
+		}else if(!article){
+			return res.status(404).json({message:"找不到当该文章"})
 		}else{
 			console.log("删除成功");
 			res.json({success:true});

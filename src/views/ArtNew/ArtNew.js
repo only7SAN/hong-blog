@@ -12,7 +12,7 @@ import SimpleMDE from 'simplemde';
 import 'simplemde/dist/simplemde.min.css';
 import './ArtNew.scss'
 
-//页面首页主题展示
+//新建文章页面
 class ArtNew extends Component {
     constructor(props) {
         super(props);
