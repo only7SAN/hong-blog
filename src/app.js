@@ -1,5 +1,5 @@
-import React,{ Component }from 'react';
-import ReactDOM,{ render }from 'react-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
@@ -8,9 +8,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import createHistory from 'history/createBrowserHistory'
 import { Route } from 'react-router'
 
-import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
-
-import Root from './layouts/root';
+import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux'
 
 import './views/common.scss';
 
@@ -18,7 +16,6 @@ import Home from './views/Home/Home';
 import ArtDetail from './views/ArtDetail/ArtDetail';
 import ArtNew from './views/ArtNew/ArtNew';
 import SignIn from './views/SignIn/SignIn';
-import SignOut from './views/SignOut/SignOut';
 import SignUp from './views/SignUp/SignUp';
 
 import reducers from './store/reducer';

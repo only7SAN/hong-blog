@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 
@@ -15,12 +16,16 @@ class SignUp extends Component {
     render(){
         return (
             <div className="sign-up">
-            	<Header />
-            	<SignUpTable history={this.props.history} />
-            	<Footer />
+                <Header />
+                <SignUpTable history={this.props.history} />
+                <Footer />
             </div>
                         );
     }
+}
+
+SignUp.propTypes = {
+  history: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) =>{

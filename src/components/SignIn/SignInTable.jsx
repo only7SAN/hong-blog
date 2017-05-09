@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import {Tool} from '../../tool';
 
 //页面首页主题展示
 class SignInTable extends Component {
@@ -38,20 +38,25 @@ class SignInTable extends Component {
     render(){
         return (
             <div className="sign-in-table">
-            	<h3 className="sign-in-title">Hong-Blog</h3>
-            	<label className="sign-in-label" htmlFor="username">username:</label>
-            	<input ref={(username) => { this.username = username }} className="sign-in-username sign-in-input" name="username" type="text" />
-            	<label className="sign-in-label" htmlFor="password">password:</label>
-            	<input ref={(password) => { this.password = password }} className="sign-in-password sign-in-input" name="password" type="password" />
+                <h3 className="sign-in-title">Hong-Blog</h3>
+                <label className="sign-in-label" htmlFor="username">username:</label>
+                <input ref={(username) => { this.username = username }} className="sign-in-username sign-in-input" name="username" type="text" />
+                <label className="sign-in-label" htmlFor="password">password:</label>
+                <input ref={(password) => { this.password = password }} className="sign-in-password sign-in-input" name="password" type="password" />
                 <div className="sign-in-btns">
-                	<button className="sign-in-btn sign-in-in" onClick={ this.signIn } >Sign In</button>
-                	<button className="sign-in-btn sign-in-up">
+                    <button className="sign-in-btn sign-in-in" onClick={ this.signIn } >Sign In</button>
+                    <button className="sign-in-btn sign-in-up">
                         <Link to="/signup">Sign Up</Link>
                     </button>
                 </div>
             </div>
                         );
     }
+}
+
+SignInTable.propTypes = {
+  actions: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 }
 
 

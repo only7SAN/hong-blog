@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 
@@ -16,15 +17,20 @@ class SignIn extends Component {
         let { actions } = this.props;
         return (
             <div className="sign-in">
-            	<Header />
+                <Header />
                 <div className="sign-in-middle container">
-                	<SignInBan  />
-                	<SignInTable history={this.props.history} actions={actions} />
+                    <SignInBan  />
+                    <SignInTable history={this.props.history} actions={actions} />
                 </div>
-            	<Footer />
+                <Footer />
             </div>
                         );
     }
+}
+
+SignIn.propTypes = {
+  actions: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) =>{

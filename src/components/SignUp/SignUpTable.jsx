@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react';
-import { findDOMNode } from 'react-dom';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import AvatarEditor from 'react-avatar-editor';
 import {Tool} from '../../tool'
 
@@ -21,14 +21,13 @@ class SignUpTable extends Component {
 
     fileChange(){
         let imageFile = this.imageFile.files[0],
-            imgPreview = this.preview,
             ext=imageFile.name.substring(imageFile.name.lastIndexOf(".")+1).toLowerCase();
 
         let reader = new FileReader();
 
          // gif在IE浏览器暂时无法显示
         if(typeof FileReader == 'undefined') {
-            result.innerHTML = "抱歉，你的浏览器不支持FileReader";
+            alert("抱歉，你的浏览器不支持FileReader");
          }else if(ext!='png'&&ext!='jpg'&&ext!='jpeg'){
              alert("图片的格式必须为png或者jpg或者jpeg格式！");
              return;
@@ -38,7 +37,7 @@ class SignUpTable extends Component {
         }
 
         reader.readAsDataURL(imageFile);
-        reader.onload = (e) =>{
+        reader.onload = () =>{
             this.setState({image:reader.result});
         }
 
@@ -77,7 +76,7 @@ class SignUpTable extends Component {
     render(){
         return (
             <div className="sign-up-table">
-            	<div className="sign-up-row">
+                <div className="sign-up-row">
                     <label className="sign-up-tip" htmlFor="sign-up-username">username:</label>
                     <input ref={
                         (username) => { this.username = username}
@@ -117,5 +116,8 @@ class SignUpTable extends Component {
     }
 }
 
+SignUpTable.propTypes = {
+  history: PropTypes.object.isRequired
+}
 
 export default SignUpTable;

@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 
@@ -41,23 +42,30 @@ class Home extends Component {
     }
 
     render(){
-        let { User, actions ,state} = this.props;
+        let { User ,state} = this.props;
         return (
             <div className="home">
-            	<Header />
+                <Header />
                 <div className="home-middle">
-                	<UserView User={User} signOut={this.signOut} />
-                	<ArtList User={User} state={ state } />
+                    <UserView User={User} signOut={this.signOut} />
+                    <ArtList User={User} state={ state } />
                     <div className="back-color" />
                 </div>
-            	<Footer />
+                <Footer />
             </div>
                         );
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
+    shouldComponentUpdate(nextProps) {
         return nextProps !== this.props;
     }
+}
+
+Home.propTypes = {
+  actions: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  User: PropTypes.object.isRequired,
+  state:PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) =>{

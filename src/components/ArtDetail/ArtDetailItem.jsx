@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from "prop-types";
 import marked from 'marked';
 
 class ArtDetailItem extends Component {
@@ -32,6 +33,10 @@ class ArtDetailItem extends Component {
             </div>
                         );
     }
+}
+
+ArtDetailItem.propTypes = {
+  data: PropTypes.object.isRequired
 }
 
 

@@ -5,9 +5,9 @@ class ArtNewIcon extends Component {
 
     render(){
         return (
-        	<div className="art-new-icon">
-        		<Link className="art-new-icon-text" to="/art/new">+</Link>
-        	</div>
+			<div className="art-new-icon">
+				<Link className="art-new-icon-text" to="/art/new">+</Link>
+			</div>
                         );
     }
 }

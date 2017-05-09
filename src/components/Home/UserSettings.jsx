@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from "prop-types";
 
 //用户设置页面
 class UserSettings extends Component {
@@ -20,14 +21,17 @@ class UserSettings extends Component {
     render(){
         return (
             <div className="user-settings" onMouseOver={this.mouseover} onMouseOut={this.mouseout}>
-            	<div className="user-settings-icon" />
-            	<ul className={"user-settings-pannel "+ this.state.pannelClass }  >
-            		<li className="user-pannel-signout" onClick={this.signOut}>退出</li>
-            	</ul>
+				<div className="user-settings-icon" />
+				<ul className={"user-settings-pannel "+ this.state.pannelClass }  >
+					<li className="user-pannel-signout" onClick={this.signOut}>退出</li>
+				</ul>
             </div>
                         );
     }
 }
 
+UserSettings.propTypes = {
+  signOut: PropTypes.func.isRequired
+}
 
 export default UserSettings;

@@ -5,7 +5,7 @@ var User = require('../mongo/model/user');
 var Article = require('../mongo/model/article');
 
 //get home page,因为使用了react-router来处理处理做单页应用，在express中我们就只用给其一个入口路径
-router.get('/',function(req,res,next){
+router.get('/',function(req,res){
     res.render('./index');
 })
 
@@ -43,13 +43,13 @@ router.post('/api/user',function(req,res){
 		}
 		let hash = user.password;
 		bcrypt.compare(obj.password, hash, function(err, result) {
-		    // res == true
-		    if(err){
-		    	console.log("比较密码出错")
-		    	return res.status(404).json({message:"比较密码出错"});
+			// res == true
+			if(err){
+				console.log("比较密码出错")
+				return res.status(404).json({message:"比较密码出错"});
 			}else if(result == true){
-		    	res.json(user);
-		    }
+				res.json(user);
+			}
 		});
 	})
 })
@@ -112,15 +112,15 @@ router.post('/api/user/new',function(req,res){
 			return res.json({exist:true})
 		}else{
 			bcrypt.genSalt(10, function(err, salt) {
-			    bcrypt.hash(obj.password, salt, function(err, hash) {
-			        // Store hash in your password DB.
-			        if(err){
-			        	console.log("生成hash失败")
-			        	return res.status(500).json({error:true,message:"生成hash请求失败"})
-			        }else{
-				        obj.password = hash;
-				        console.log(obj)
-					    User.create(obj,function(err,user){
+				bcrypt.hash(obj.password, salt, function(err, hash) {
+				// Store hash in your password DB.
+					if(err){
+						console.log("生成hash失败")
+						return res.status(500).json({error:true,message:"生成hash请求失败"})
+					}else{
+						obj.password = hash;
+						console.log(obj)
+						User.create(obj,function(err){
 							if(err){
 								console.log("录入用户失败");
 								return res.status(500).json({error:true,message:"创建用户请求失败"});
@@ -130,7 +130,7 @@ router.post('/api/user/new',function(req,res){
 							}
 						});
 					}
-			    });
+				});
 			})
 		}
 	})
@@ -187,7 +187,7 @@ router.post('/api/article/new',function(req,res){
 			}
 			user.articles.push(article._id);
 			var user_id = user._id; //需要取出主键_id
-      		delete user._id;
+			delete user._id;
 			User.update({_id:user_id},user,function(err){
 				if(err){
 					console.log(err)
@@ -226,7 +226,7 @@ router.post('/api/article/update',function(req,res){
 			}else if(!article){
 				return res.status(404).json({message:"找不到当该文章"})
 			}else{
-				for(name in data){
+				for(var name in data){
 					data[name] = name;
 				}
 				article.update_at = new Date();
@@ -263,7 +263,7 @@ router.get('/api/article/del',function(req,res){
 	})
 })
 
-router.get('/*',function(req,res,next){
+router.get('/*',function(req,res){
     res.render('./index');
 })
 

@@ -1,11 +1,11 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 import { findDOMNode } from 'react-dom';
 
 import actions from '../actions';
 
-import { ArtNewContent, ArtNewMsg } from '../../components/ArtNew';
 import { Header, Footer } from '../../components/common';
 
 import SimpleMDE from 'simplemde';
@@ -71,18 +71,17 @@ class ArtNew extends Component {
     }
 
     render(){
-        let User = JSON.parse(sessionStorage.getItem('User'));
         return (
             <div className="art-new">
-            	<Header />
+                <Header />
                 <div className="art-new-table">
-                	<div className="art-new-msg">
+                    <div className="art-new-msg">
                         <label className="art-new-title art-new-tip" htmlFor="art-new-title">标题</label>
                         <input ref={(title) => {this.title = title}} className="art-new-input" name="art-new-title" type="text" placeholder="这里是标题" />
                         <label className="art-new-label art-new-tip" htmlFor="art-new-label">标签</label>
                         <input ref={(label) => {this.label= label}} className="art-new-input" name="art-new-label" type="text" placeholder="这里是标签" />
                     </div>
-                	<div className="art-new-content">
+                    <div className="art-new-content">
                         <div className="art-new-tip art-new-inner">内容</div>
                         <div className="art-new-simplemde">
                             <textarea ref={(simplemde) => {
@@ -92,10 +91,16 @@ class ArtNew extends Component {
                         <button className="art-new-btn" onClick={this.submit}>发表</button>
                     </div>
                 </div>
-            	<Footer />
+                <Footer />
             </div>
                         );
     }
+}
+
+ArtNew.propTypes = {
+  actions: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  User: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) =>{

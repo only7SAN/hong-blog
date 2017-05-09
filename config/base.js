@@ -1,8 +1,7 @@
-var webpack = require('webpack');
 var path =require('path');
 
 var publicPath = '/dist'; //服务器路径
-var path = path.resolve(__dirname, '../dist');
+var outPath = path.resolve(__dirname, '../dist');
 
 
 var plugins = [];
@@ -14,7 +13,7 @@ module.exports = {
     },
     output: {
         publicPath, //编译好的文件，在服务器的路径
-        path, //编译到当前目录
+        path:outPath, //编译到当前目录
         filename: '[name].js' //编译后的文件名字
     },
     resolve: {

@@ -1,6 +1,5 @@
-import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router-dom';
-import { Tool } from '../../tool';
+import React, { Component } from 'react';
+import PropTypes from "prop-types";
 
 import ArtItem from './ArtItem';
 import ArtNewIcon from './ArtNewIcon';
@@ -29,12 +28,17 @@ class ArtList extends Component {
         return (
             <div className="art-list">
                 <ul className="art-items">
-                	{ newIcon }
+                    { newIcon }
                     { main }
                 </ul>
             </div>
                         );
     }
+}
+
+ArtList.propTypes = {
+  state: PropTypes.object.isRequired,
+  User: PropTypes.object.isRequired
 }
 
 

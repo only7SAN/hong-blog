@@ -1,10 +1,11 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 
 import actions from '../actions';
 import { ArtDetailItem,ArtDetailLoad } from '../../components/ArtDetail'
-import { Header, Footer } from '../../components/common';
+import { Header } from '../../components/common';
 
 import './ArtDetail.scss';
 
@@ -13,7 +14,7 @@ class ArtDetail extends Component {
 
     componentDidMount() {
         console.log(this.props)
-        let { User, actions } = this.props;
+        let { actions } = this.props;
         actions.fetchData({
             component:"ArtDetail",
             prefix:"ARTDETAIL/",
@@ -43,6 +44,12 @@ class ArtDetail extends Component {
             </div>
                         );
     }
+}
+
+ArtDetail.propTypes = {
+  actions: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  state: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) =>{

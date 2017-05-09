@@ -18,10 +18,10 @@ Tool.ajax = function(mysettings){
 	var aData = [], //储存数据
 		sData = '';	//拼接数据
 
-	for(var attr in mysettings){
+	for(let attr in mysettings){
 		settings[attr] = mysettings[attr];
 	}
-	for(var attr in settings.data){
+	for(let attr in settings.data){
 		aData.push(encodeURIComponent(attr) + '=' + encodeURIComponent(settings.data[attr]));
 	}
 	sData = aData.join('&');
@@ -51,14 +51,14 @@ Tool.ajax = function(mysettings){
 				var response = xhr.responseText;
 
 				if (/application\/json/.test(responseHeader) || settings.dataType === 'json' && /^(\{|\[)([\s\S])*?(\]|\})$/.test(response)) {
-	                response = JSON.parse(response);
-	            }
+					response = JSON.parse(response);
+				}
 
-	            if(xhr.status == 200){
-	            	resolve(response);
-	            }else{
-	            	reject(new Error(xhr.statusText));
-	            }
+				if(xhr.status == 200){
+					resolve(response);
+				}else{
+					reject(new Error(xhr.statusText));
+				}
 
 			}
 		}

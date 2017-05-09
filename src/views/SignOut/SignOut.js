@@ -1,6 +1,4 @@
-import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
 
 //页面首页主题展示
 class SignOut extends Component {
