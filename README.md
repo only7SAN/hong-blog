@@ -16,6 +16,8 @@
 ## 项目预览
 
 ## 运行
+    npm clone https://github.com/only7SAN/hong-blog
+    npm install
     npm run dev "访问开发环境"
     npm run dist "访问生产环境"
     npm run lint "eslint代码风格校验"
@@ -35,7 +37,7 @@
 * eslint 进行代码风格校验
 
 ## 接下来（未完成）
-* 文章的分页（使用mongoose分页api）
+* 文章的分页
 * 点赞与评论功能
 * 用户权限的设置
 * 动画效果
@@ -68,4 +70,4 @@
 * 准备闭关。。。力争上游
 
 ## 感谢
-嗯，看了很多文章，吸血（学习）了很多代码，感谢他们，如下，我找找
+嗯，看了很多文章，吸血（学习）了很多代码，感谢他们，如下

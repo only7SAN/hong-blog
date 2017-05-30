@@ -1,7 +1,7 @@
 {
   "name": "hong-blog",
   "version": "1.0.0",
-  "description": "博 客  站坑 请期待",
+  "description": "react redux 博客  请期待",
   "main": "index.js",
   "dependencies": {
     "bcrypt": "^1.0.2",
@@ -9,7 +9,6 @@
     "express": "^4.15.2",
     "history": "^4.6.1",
     "immutable": "^3.8.1",
-    "install": "^0.8.9",
     "marked": "^0.3.6",
     "mongoose": "^4.9.5",
     "prop-types": "^15.5.8",
