@@ -1,20 +1,31 @@
 .sign-up{
-	position: absolute;
-	top:60px;
-	left: 0px;
-	bottom: 0px;
-	right: 0px;
-	overflow: hidden;
+	position: relative;
+	margin-top: 60px;
 	background-color: #3976a0;
 }
 
 .sign-up-table{
 	position: relative;
 	width: 1000px;
-	height: 450px;
 	margin: 40px auto;
 	border:2px solid #fff;
 	border-radius: 10px;
+	background-color: rgba(0,0,0,.3);
+}
+
+.sign-up-table :after{clear:both;content:'.';display:block;width: 0;height: 0;visibility:hidden;}
+
+.sign-up-h1{
+	position: relative;
+	margin:20px 0;
+	text-align: center;
+	color:#fff;
+}
+
+.sign-up-left{
+	position: relative;
+	float: left;
+	width: 450px;
 }
 
 .sign-up-row{
@@ -35,21 +46,42 @@
 }
 
 .sign-up-head{
-	position: absolute;
-	right: 0px;
-	top: 0px;
-	bottom: 0px;
+	position: relative;
+	float: right;
 	width: 550px;
 	font-size: 30px;
 	color: #fff;
+	overflow: auto;
 }
 
+.sign-up-file{
+	width:200px;
+	height: 60px;
+	border:0px;
+}
 
 .sign-up-preview{
-	position: absolute;
-	bottom: 100px;
 }
 
 .sign-up-preview-text{
 	vertical-align: top;
+}
+
+.sign-up-img-result{
+	width:140px;
+	height: 40px;
+	border:0px;
+	background-color: #fff;
+	font-size: 24px;
+	color: #000;
+}
+
+.sign-up-submit{
+	width:140px;
+	height: 40px;
+	border:0px;
+	clear:both;
+	background-color: #fff;
+	font-size: 24px;
+	color: #000;
 }

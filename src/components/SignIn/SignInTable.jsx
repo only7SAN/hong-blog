@@ -45,9 +45,11 @@ class SignInTable extends Component {
                 <input ref={(password) => { this.password = password }} className="sign-in-password sign-in-input" name="password" type="password" />
                 <div className="sign-in-btns">
                     <button className="sign-in-btn sign-in-in" onClick={ this.signIn } >Sign In</button>
-                    <button className="sign-in-btn sign-in-up">
-                        <Link to="/signup">Sign Up</Link>
-                    </button>
+                    <Link to="/signup">
+                        <button className="sign-in-btn sign-in-up">
+                            Sign Up
+                        </button>
+                    </Link>
                 </div>
             </div>
                         );

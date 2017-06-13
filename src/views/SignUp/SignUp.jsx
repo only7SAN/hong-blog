@@ -18,7 +18,6 @@ class SignUp extends Component {
             <div className="sign-up">
                 <Header />
                 <SignUpTable history={this.props.history} />
-                <Footer />
             </div>
                         );
     }

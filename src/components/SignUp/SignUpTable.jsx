@@ -76,23 +76,26 @@ class SignUpTable extends Component {
     render(){
         return (
             <div className="sign-up-table">
-                <div className="sign-up-row">
-                    <label className="sign-up-tip" htmlFor="sign-up-username">username:</label>
-                    <input ref={
-                        (username) => { this.username = username}
-                    } className="sign-up-input" name="sign-up-username" type="text" />
-                </div>
-                <div className="sign-up-row">
-                    <label className="sign-up-tip" htmlFor="sign-up-password">password:</label>
-                    <input ref={
-                        (password) => { this.password = password}
-                    } className="sign-up-input" name="sign-up-password" type="password" />
+                <h1 className="sign-up-h1">注册表</h1>
+                <div className="sign-up-left">
+                    <div className="sign-up-row">
+                        <label className="sign-up-tip" htmlFor="sign-up-username">username:</label>
+                        <input ref={
+                            (username) => { this.username = username}
+                        } className="sign-up-input" name="sign-up-username" type="text" />
+                    </div>
+                    <div className="sign-up-row">
+                        <label className="sign-up-tip" htmlFor="sign-up-password">password:</label>
+                        <input ref={
+                            (password) => { this.password = password}
+                        } className="sign-up-input" name="sign-up-password" type="password" />
+                    </div>
                 </div>
                 <div className="sign-up-head">
                     <span className="sign-up-img-text">上传图片:</span>
                     <input ref={(imageFile) => {
                         this.imageFile = imageFile
-                    }} type="file" name="file" onChange={ this.fileChange } />
+                    }} className="sign-up-file" type="file" name="file" onChange={ this.fileChange } />
                     <div className="sign-up-preview">
                         <span className="sign-up-preview-text">调整:</span>
                         <AvatarEditor ref={(preview) =>{
